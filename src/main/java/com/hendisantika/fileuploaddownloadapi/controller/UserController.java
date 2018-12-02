@@ -5,9 +5,9 @@ import com.hendisantika.fileuploaddownloadapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,11 +31,17 @@ import java.io.OutputStream;
  */
 @Controller
 public class UserController {
-    private static String uploadedFolder = "/tmp/upload";
+    private static String uploadedFolder = "/tmp/upload/";
     @Autowired
     private UserService service;
 
-    @RequestMapping("/uploadFile")
+    @GetMapping("/")
+    public String index() {
+        return "upload";
+    }
+
+
+    @PostMapping("/uploadFile")
     public String uploadFile(@ModelAttribute UserDTO dto, Model model) {
         String message = "";
         String fileInfo = "";
@@ -56,7 +62,7 @@ public class UserController {
         return "upload";
     }
 
-    @RequestMapping(value = "/downloadFile", method = RequestMethod.GET)
+    @GetMapping("/downloadFile")
     public void doDownload(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") int id)
             throws IOException {
         final int BUFFER_SIZE = 4096;
