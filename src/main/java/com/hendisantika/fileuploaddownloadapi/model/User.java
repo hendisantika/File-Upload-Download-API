@@ -26,4 +26,16 @@ public class User {
     private String name;
     private String fileStoredPath;
     private String fileID;
+
+    public User() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+    public User(String name, String fileStoredPath, String fileID) {
+        super();
+        this.name = name;
+        this.fileStoredPath = fileStoredPath;
+        this.fileID = fileID;
+    }
 }
