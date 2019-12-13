@@ -33,6 +33,6 @@ public class UserService {
     }
 
     public String getSaveFilePathByUser(int id) {
-        return userRepository.findOne(id).getFileStoredPath();
+        return userRepository.findById(id).get().getFileStoredPath();
     }
 }
